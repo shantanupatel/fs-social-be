@@ -3,6 +3,7 @@ package com.social.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.models.User;
+import com.social.repository.UserRepository;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+
+	@Autowired
+	UserRepository userRepository;
 
 	@GetMapping
 	public List<User> getUsers() {
@@ -41,15 +46,9 @@ public class UserController {
 
 	@PostMapping
 	public User createUser(@RequestBody User user) {
-		User newUser = new User();
+		User savedUser = userRepository.save(user);
 
-		newUser.setId(user.getId());
-		newUser.setFirstName(user.getFirstName());
-		newUser.setLastName(user.getLastName());
-		newUser.setEmail(user.getEmail());
-		newUser.setPassword(user.getPassword());
-
-		return newUser;
+		return savedUser;
 	}
 
 	@PutMapping
