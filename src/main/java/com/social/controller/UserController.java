@@ -49,27 +49,36 @@ public class UserController {
 		return savedUser;
 	}
 
-	@PutMapping
-	public User updateUser(@RequestBody User user) {
-		User user1 = new User(1, "John", "Doe", "john.doe@gmail.com", "12345");
+	@PutMapping("/{userId}")
+	public User updateUser(@RequestBody User user, @PathVariable("userId") int id) throws Exception {
+
+		Optional<User> matchingUser = userRepository.findById(id);
+
+		if (matchingUser.isEmpty()) {
+			throw new Exception("User with specified id " + id + " doesn't exist.");
+		}
+
+		User oldUser = matchingUser.get();
 
 		if (user.getFirstName() != null) {
-			user1.setFirstName(user.getFirstName());
+			oldUser.setFirstName(user.getFirstName());
 		}
 
 		if (user.getLastName() != null) {
-			user1.setLastName(user.getLastName());
+			oldUser.setLastName(user.getLastName());
 		}
 
 		if (user.getEmail() != null) {
-			user1.setEmail(user.getEmail());
+			oldUser.setEmail(user.getEmail());
 		}
 
 		if (user.getPassword() != null) {
-			user1.setPassword(user.getPassword());
+			oldUser.setPassword(user.getPassword());
 		}
 
-		return user1;
+		User updatedUser = userRepository.save(oldUser);
+
+		return updatedUser;
 	}
 
 	@DeleteMapping("/{userId}")
