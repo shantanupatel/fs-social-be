@@ -8,7 +8,7 @@ public interface UserService {
 
 	public User registerUser(User user);
 
-	public User findUserById(int userId);
+	public User findUserById(int userId) throws Exception;
 
 	public User findUserByEmail(String email);
 
