@@ -1,6 +1,7 @@
 package com.social.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,10 +32,14 @@ public class UserController {
 	}
 
 	@GetMapping("/{userId}")
-	public User getUsersById(@PathVariable("userId") int id) {
-		User user1 = new User(1, "John", "Doe", "john.doe@gmail.com", "12345");
+	public User getUsersById(@PathVariable("userId") int id) throws Exception {
+		Optional<User> user = userRepository.findById(id);
 
-		return user1;
+		if (user.isPresent()) {
+			return user.get();
+		}
+
+		throw new Exception("User with specified id doesn't exist");
 	}
 
 	@PostMapping
