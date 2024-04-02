@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.social.models.User;
 import com.social.repository.UserRepository;
+import com.social.service.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -22,6 +23,9 @@ public class UserController {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	UserService userService;
 
 	@GetMapping
 	public List<User> getUsers() {
@@ -44,9 +48,11 @@ public class UserController {
 
 	@PostMapping
 	public User createUser(@RequestBody User user) {
-		User savedUser = userRepository.save(user);
+
+		User savedUser = userService.registerUser(user);
 
 		return savedUser;
+
 	}
 
 	@PutMapping("/{userId}")
