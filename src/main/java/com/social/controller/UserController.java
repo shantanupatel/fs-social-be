@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.models.User;
@@ -97,5 +98,13 @@ public class UserController {
 
 		return "User with specified id " + userId + " has been deleted successfully.";
 
+	}
+
+	@GetMapping("/search")
+	public User getUsersByEmail(@RequestParam String email) throws Exception {
+
+		User user = userService.findUserByEmail(email);
+
+		return user;
 	}
 }
