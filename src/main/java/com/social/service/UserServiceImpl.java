@@ -43,17 +43,17 @@ public class UserServiceImpl implements UserService {
 		throw new Exception("User with specified id " + userId + " doesn't exist.");
 	}
 
-	@Override
-	public User findUserByEmail(String email) throws Exception {
-
-		Optional<User> user = userRepository.findByEmail(email);
-
-		if (user.isPresent()) {
-			return user.get();
-		}
-
-		throw new Exception("User with specified email doesn't exist");
-	}
+	// @Override
+	// public User findUserByEmail(String email) throws Exception {
+	//
+	// Optional<User> user = userRepository.findByEmail(email);
+	//
+	// if (user.isPresent()) {
+	// return user.get();
+	// }
+	//
+	// throw new Exception("User with specified email doesn't exist");
+	// }
 
 	@Override
 	public User followUser(int userId1, int userId2) throws Exception {
