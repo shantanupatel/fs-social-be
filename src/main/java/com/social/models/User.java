@@ -1,5 +1,6 @@
 package com.social.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -11,15 +12,15 @@ import jakarta.persistence.Id;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
 	private String gender;
-	private List<Integer> followers;
-	private List<Integer> followings;
+	private List<Integer> followers = new ArrayList<>();
+	private List<Integer> followings = new ArrayList<>();
 
 	public User() {}
 
