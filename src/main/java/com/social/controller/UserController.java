@@ -76,11 +76,28 @@ public class UserController {
 
 	}
 
-	@GetMapping("/search")
-	public User getUsersByEmail(@RequestParam String email) throws Exception {
+	// @GetMapping("/search")
+	// public User getUsersByEmail(@RequestParam String email) throws Exception {
+	//
+	// User user = userService.findUserByEmail(email);
+	//
+	// return user;
+	// }
 
-		User user = userService.findUserByEmail(email);
+	@PutMapping("/follow/{userId1}/{userId2}")
+	public User followUserHandler(@PathVariable int userId1, @PathVariable int userId2) throws Exception {
+
+		User user = userService.followUser(userId1, userId2);
 
 		return user;
+	}
+
+	@GetMapping("/search")
+	public List<User> searchUser(@RequestParam("query") String query) {
+
+		List<User> users = userService.searchUser(query);
+
+		return users;
+
 	}
 }
