@@ -14,7 +14,7 @@ public interface UserService {
 
 	public User followUser(int userId1, int userId2) throws Exception;
 
-	public User updateUser(User user);
+	public User updateUser(User user, int id) throws Exception;
 
 	public List<User> searchUser(String query);
 

@@ -72,9 +72,36 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public User updateUser(User user, int userId) throws Exception {
+
+		Optional<User> matchingUser = userRepository.findById(userId);
+
+		if (matchingUser.isEmpty()) {
+			throw new Exception("User with specified id " + userId + " doesn't exist.");
+		}
+
+		User oldUser = matchingUser.get();
+
+		if (user.getFirstName() != null) {
+			oldUser.setFirstName(user.getFirstName());
+		}
+
+		if (user.getLastName() != null) {
+			oldUser.setLastName(user.getLastName());
+		}
+
+		if (user.getEmail() != null) {
+			oldUser.setEmail(user.getEmail());
+		}
+
+		if (user.getPassword() != null) {
+			oldUser.setPassword(user.getPassword());
+		}
+
+		User updatedUser = userRepository.save(oldUser);
+
+		return updatedUser;
+
 	}
 
 	@Override

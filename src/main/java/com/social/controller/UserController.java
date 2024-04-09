@@ -56,31 +56,7 @@ public class UserController {
 	@PutMapping("/{userId}")
 	public User updateUser(@RequestBody User user, @PathVariable("userId") int id) throws Exception {
 
-		Optional<User> matchingUser = userRepository.findById(id);
-
-		if (matchingUser.isEmpty()) {
-			throw new Exception("User with specified id " + id + " doesn't exist.");
-		}
-
-		User oldUser = matchingUser.get();
-
-		if (user.getFirstName() != null) {
-			oldUser.setFirstName(user.getFirstName());
-		}
-
-		if (user.getLastName() != null) {
-			oldUser.setLastName(user.getLastName());
-		}
-
-		if (user.getEmail() != null) {
-			oldUser.setEmail(user.getEmail());
-		}
-
-		if (user.getPassword() != null) {
-			oldUser.setPassword(user.getPassword());
-		}
-
-		User updatedUser = userRepository.save(oldUser);
+		User updatedUser = userService.updateUser(user, id);
 
 		return updatedUser;
 	}
