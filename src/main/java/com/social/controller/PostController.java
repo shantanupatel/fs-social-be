@@ -1,26 +1,33 @@
 package com.social.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.models.Post;
 
 @RestController
+@RequestMapping(value = "/posts")
 public class PostController {
 
-	@GetMapping("/posts")
-	public List<Post> getPosts() {
-		List<Post> posts = new ArrayList<>();
+	// @GetMapping()
+	// public String getPost() {
+	// return "Hello from Post";
+	// }
 
-		Post post1 = new Post(1, "Test Post 1");
-		Post post2 = new Post(1, "Test Post 2");
-
-		posts.add(post1);
-		posts.add(post2);
-
-		return posts;
+	@PostMapping
+	public Post createPost(@RequestBody Post post) {
+		return null;
 	}
+
+	// deletePost
+
+	// findPostByUserId
+
+	// findAllPosts
+
+	// savedPost
+
+	// likePost
 }
