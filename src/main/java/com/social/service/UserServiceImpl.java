@@ -56,9 +56,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User followUser(int userId1, int userId2) {
-		// TODO Auto-generated method stub
-		return null;
+	public User followUser(int userId1, int userId2) throws Exception {
+		User user1 = findUserById(userId1);
+		User user2 = findUserById(userId2);
+
+		// list of followers for user2 should get updated with addition of id of user1
+		user2.getFollowers().add(user1.getId());
+		// list of followings for user1 should get updated with addition of id of user2
+		user1.getFollowings().add(user2.getId());
+
+		userRepository.save(user1);
+		userRepository.save(user2);
+
+		return user1;
 	}
 
 	@Override

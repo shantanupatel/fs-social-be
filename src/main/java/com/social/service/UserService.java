@@ -12,7 +12,7 @@ public interface UserService {
 
 	public User findUserByEmail(String email) throws Exception;
 
-	public User followUser(int userId1, int userId2);
+	public User followUser(int userId1, int userId2) throws Exception;
 
 	public User updateUser(User user);
 
