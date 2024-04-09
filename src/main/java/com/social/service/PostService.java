@@ -8,7 +8,7 @@ public interface PostService {
 
 	Post createNewPost(Post post, int userId) throws Exception;
 
-	String deletePost(int postId, int userId);
+	String deletePost(int postId, int userId) throws Exception;
 
 	List<Post> findPostByUserId(int userId);
 

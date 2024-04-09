@@ -48,9 +48,19 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public String deletePost(int postId, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public String deletePost(int postId, int userId) throws Exception {
+
+		Post post = findPostById(postId);
+		User user = userService.findUserById(userId);
+
+		if (post.getUser().getId() != user.getId()) {
+			throw new Exception("Deleting another user's post is prohibited!");
+		}
+
+		postRepository.delete(post);
+
+		return "Post with id " + postId + " has been deleted successfully";
+
 	}
 
 	@Override
