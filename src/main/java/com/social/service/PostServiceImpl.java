@@ -2,6 +2,7 @@ package com.social.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,9 +60,16 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post findPostById(int postId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Post findPostById(int postId) throws Exception {
+
+		Optional<Post> post = postRepository.findById(postId);
+
+		if (post.isEmpty()) {
+			throw new Exception("Post with provided id " + postId + " not found");
+		}
+
+		return post.get();
+
 	}
 
 	@Override

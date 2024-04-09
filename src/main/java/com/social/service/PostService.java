@@ -12,7 +12,7 @@ public interface PostService {
 
 	List<Post> findPostByUserId(int userId);
 
-	Post findPostById(int postId);
+	Post findPostById(int postId) throws Exception;
 
 	List<Post> findAllPosts();
 
