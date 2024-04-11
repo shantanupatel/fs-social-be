@@ -65,6 +65,14 @@ public class PostController {
 		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
 	}
 
+	@GetMapping
+	public ResponseEntity<List<Post>> findAllPosts() {
+
+		List<Post> posts = postService.findAllPosts();
+
+		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+	}
+
 	// savedPost
 
 	// likePost
