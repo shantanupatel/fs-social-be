@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +37,6 @@ public class PostController {
 		return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
 	}
 
-	// deletePost
 	@DeleteMapping("/{postId}/user/{userId}")
 	public ResponseEntity<ApiResponse> deletePost(@PathVariable int postId, @PathVariable int userId) throws Exception {
 
@@ -47,7 +47,13 @@ public class PostController {
 		return new ResponseEntity<ApiResponse>(res, HttpStatus.OK);
 	}
 
-	// findPostByUserId
+	@GetMapping("/{postId}")
+	public ResponseEntity<Post> findPostByIdHandler(@PathVariable int postId) throws Exception {
+
+		Post post = postService.findPostById(postId);
+
+		return new ResponseEntity<Post>(post, HttpStatus.ACCEPTED);
+	}
 
 	// findAllPosts
 
