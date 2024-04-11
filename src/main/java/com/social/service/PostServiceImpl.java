@@ -10,21 +10,24 @@ import org.springframework.stereotype.Service;
 import com.social.models.Post;
 import com.social.models.User;
 import com.social.repository.PostRepository;
+import com.social.repository.UserRepository;
 
 @Service
 public class PostServiceImpl implements PostService {
 
 	PostRepository postRepository;
 	UserService userService;
+	UserRepository userRepository;
 
 	public PostServiceImpl() {
 	}
 
 	@Autowired
-	public PostServiceImpl(PostRepository postRepository, UserService userService) {
+	public PostServiceImpl(PostRepository postRepository, UserService userService, UserRepository userRepository) {
 		super();
 		this.postRepository = postRepository;
 		this.userService = userService;
+		this.userRepository = userRepository;
 	}
 
 	@Override
@@ -89,9 +92,20 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post savedPost(int postId, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Post savedPost(int postId, int userId) throws Exception {
+
+		Post post = findPostById(postId);
+		User user = userService.findUserById(userId);
+
+		if (user.getSavedPost().contains(post)) {
+			user.getSavedPost().remove(post);
+		} else {
+			user.getSavedPost().add(post);
+		}
+
+		userRepository.save(user);
+
+		return post;
 	}
 
 	@Override
@@ -99,7 +113,7 @@ public class PostServiceImpl implements PostService {
 
 		Post post = findPostById(postId);
 		User user = userService.findUserById(userId);
-		
+
 		if (post.getLiked().contains(user)) {
 			post.getLiked().remove(user);
 		} else {
