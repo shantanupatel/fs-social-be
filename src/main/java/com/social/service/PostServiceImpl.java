@@ -84,8 +84,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> findAllPosts() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return postRepository.findAll();
 	}
 
 	@Override
@@ -95,9 +95,14 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post likePost(int postId, int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Post likePost(int postId, int userId) throws Exception {
+
+		Post post = findPostById(postId);
+		User user = userService.findUserById(userId);
+
+		post.getLiked().add(user);
+
+		return postRepository.save(post);
 	}
 
 }
