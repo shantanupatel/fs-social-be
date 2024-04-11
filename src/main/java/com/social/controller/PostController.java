@@ -1,5 +1,7 @@
 package com.social.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +57,13 @@ public class PostController {
 		return new ResponseEntity<Post>(post, HttpStatus.ACCEPTED);
 	}
 
-	// findAllPosts
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<List<Post>> findUsersPost(@PathVariable int userId) {
+
+		List<Post> posts = postService.findPostByUserId(userId);
+
+		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+	}
 
 	// savedPost
 
