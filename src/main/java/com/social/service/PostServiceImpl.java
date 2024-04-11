@@ -65,8 +65,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> findPostByUserId(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return postRepository.findPostByUserId(userId);
 	}
 
 	@Override
