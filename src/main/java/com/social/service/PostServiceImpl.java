@@ -99,8 +99,12 @@ public class PostServiceImpl implements PostService {
 
 		Post post = findPostById(postId);
 		User user = userService.findUserById(userId);
-
-		post.getLiked().add(user);
+		
+		if (post.getLiked().contains(user)) {
+			post.getLiked().remove(user);
+		} else {
+			post.getLiked().add(user);
+		}
 
 		return postRepository.save(post);
 	}
