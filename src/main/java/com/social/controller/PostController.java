@@ -3,6 +3,7 @@ package com.social.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.models.Post;
+import com.social.response.ApiResponse;
 import com.social.service.PostService;
 
 @RestController
@@ -35,6 +37,15 @@ public class PostController {
 	}
 
 	// deletePost
+	@DeleteMapping("/{postId}/user/{userId}")
+	public ResponseEntity<ApiResponse> deletePost(@PathVariable int postId, @PathVariable int userId) throws Exception {
+
+		String message = postService.deletePost(postId, userId);
+
+		ApiResponse res = new ApiResponse(message, true);
+
+		return new ResponseEntity<ApiResponse>(res, HttpStatus.OK);
+	}
 
 	// findPostByUserId
 
