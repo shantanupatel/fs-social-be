@@ -8,8 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Post {
@@ -20,14 +20,19 @@ public class Post {
 	private String caption;
 	private String image;
 	private String video;
-	// @JdbcTypeCode(SqlTypes.JSON)
-	@OneToOne
-	@JoinColumn(name = "id")
+
+	@ManyToOne
+	// @JoinColumn(name = "id")
 	private User user;
+
+	@OneToMany
 	private List<User> liked = new ArrayList<>();
+
 	private LocalDateTime createdAt;
 
-	public Post() {}
+	public Post() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Post(int id, String caption, String image, String video, User user, List<User> liked,
 			LocalDateTime createdAt) {
