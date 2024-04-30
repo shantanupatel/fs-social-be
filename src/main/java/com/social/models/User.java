@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class User {
@@ -21,9 +23,13 @@ public class User {
 	private String gender;
 	private List<Integer> followers = new ArrayList<>();
 	private List<Integer> followings = new ArrayList<>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Post> savedPost = new ArrayList<>();
 
-	public User() {}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public User(int id, String firstName, String lastName, String email, String password, String gender,
 			List<Integer> followers, List<Integer> followings, List<Post> savedPost) {
