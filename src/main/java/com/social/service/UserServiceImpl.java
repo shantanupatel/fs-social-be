@@ -18,14 +18,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registerUser(User user) {
 
-		User newUser = new User();
-
-		newUser.setFirstName(user.getFirstName());
-		newUser.setLastName(user.getLastName());
-		newUser.setEmail(user.getEmail());
-		newUser.setPassword(user.getPassword());
-
-		User savedUser = userRepository.save(newUser);
+		User savedUser = userRepository.save(user);
 
 		return savedUser;
 
@@ -96,6 +89,10 @@ public class UserServiceImpl implements UserService {
 
 		if (user.getPassword() != null) {
 			oldUser.setPassword(user.getPassword());
+		}
+
+		if (user.getGender() != null) {
+			oldUser.setGender(user.getGender());
 		}
 
 		User updatedUser = userRepository.save(oldUser);
