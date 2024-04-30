@@ -22,7 +22,6 @@ public class Post {
 	private String video;
 
 	@ManyToOne
-	// @JoinColumn(name = "id")
 	private User user;
 
 	@OneToMany

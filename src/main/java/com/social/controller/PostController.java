@@ -83,7 +83,7 @@ public class PostController {
 	}
 
 	@PutMapping("/like/{postId}/user/{userId}")
-	public ResponseEntity<Post> lisePostHandler(@PathVariable int postId, @PathVariable int userId) throws Exception {
+	public ResponseEntity<Post> likePostHandler(@PathVariable int postId, @PathVariable int userId) throws Exception {
 
 		Post post = postService.likePost(postId, userId);
 
